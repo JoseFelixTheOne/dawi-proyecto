@@ -76,7 +76,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-     <form action="/persona/guardar" method="post"  th:object="${persona}" >
+     <form action="/persona/guardar" method="post" id="frmPersona"  th:object="${persona}" >
        <div>
           <label>Id Persona</label>
           <input type="text" class="form-control" readonly  th:field="*{id_per}" id="id_per" />
@@ -84,33 +84,43 @@
          
           <div>
           <label>Nombre</label>
-          <input type="text" class="form-control"  th:field="*{nom_per}" id="nombre_per"  />
+          <input type="text" class="form-control ob" 
+          	 data-mensaje="nombre de la persona"
+           th:field="*{nom_per}" id="nombre_per"  />
          </div>
          
           <div>
           <label>Apellido paterno</label>
-          <input type="text" class="form-control"  th:field="*{apepat_per}" id="apepat_per"  />
+          <input type="text" class="form-control ob" 
+          data-mensaje="apellido paterno de la persona"
+           th:field="*{apepat_per}" id="apepat_per"  />
          </div>
          
             
           <div>
           <label>Apellido materno</label>
-          <input type="text" class="form-control"  th:field="*{apemat_per}" id="apemat_per"  />
+          <input type="text" class="form-control ob" 
+            data-mensaje="apellido materno de la persona"
+           th:field="*{apemat_per}" id="apemat_per"  />
          </div>
          
           <div>
           <label>Correo</label>
-          <input type="text" class="form-control"  th:field="*{correo_per}" id="correo_per"  />
+          <input type="text" class="form-control ob"
+                    data-mensaje="correo de la persona"
+            th:field="*{correo_per}" id="correo_per"  />
          </div>
          
           <div>
           <label>Direccion</label>
-          <textarea type="text" class="form-control" th:field="*{dir_per}" id="dir_per"   ></textarea>
+          <textarea type="text" class="form-control ob"
+             data-mensaje="direccion de la persona"
+           th:field="*{dir_per}" id="dir_per"   ></textarea>
          </div>
          
           <div>
           <label>Es cliente?</label>
-          <select class="form-control" th:field="*{flagcliente_per}"  >
+          <select class="form-control ob" data-mensaje="si es cliente o no" th:field="*{flagcliente_per}"  >
           	<option value="">--Seleccione--</option>
           	<option value="1">Si</option>
           	<option value="0">No</option>
@@ -123,7 +133,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="button" onclick="Guardar()" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -152,6 +162,14 @@
     	
     	function Nuevo(){
     		
+    	}
+    	
+    	function Guardar(){
+    	  var errores=	ValidarDatos("frmPersona")
+    	  if(errores!=""){
+    		  Error(errores)
+    		  return;
+    	  }
     	}
     
 
