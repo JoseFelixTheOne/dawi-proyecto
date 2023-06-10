@@ -53,6 +53,14 @@
 
 </div>
 
+<div style="display:none">
+	<form action="/personaeliminar" method="post"  >
+		<input id="txtidpersona" name="id"  />
+		<input type="submit" id="txtboton" />
+	</form>
+</div>
+
+
 
     <script src="/jquery.js"></script>
     <script src="/sweetalert.js"></script>
@@ -60,9 +68,11 @@
     
     <script>
     
-    	function Eliminar(){
+    	function Eliminar(id){
         	Confirmacion("Confirmacion","Desea eliminar realmente a la persona",function(){
-        		
+        		set("txtidpersona",id)
+        		Exito("Se elimino correctamente")
+        		document.getElementById("txtboton").click()
         	})	    		
     	}
     
