@@ -10,7 +10,7 @@
 
 <div class="container">
 	
-	<h1>Mantenimiento Persona</h1>
+	<h1 class="text-center">Mantenimiento Persona</h1>
 	
 	<!-- Button trigger modal -->
 	<button onclick="Nuevo()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -83,7 +83,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-     <form action="/persona/guardar" method="post" id="frmPersona"  th:object="${persona}" >
+     <form action="/persona" method="post" id="frmPersona"  th:object="${persona}" >
          <div style="display:none">
           <label>Id Persona</label>
           <input type="text" class="form-control" readonly  th:field="*{id_per}" id="id_per" />

@@ -50,7 +50,7 @@ public class PersonaController {
 		return "crudpersona";
 	}
 	
-	@PostMapping("/persona/guardar")
+	@PostMapping("/persona")
 	public String guardarPersona(@ModelAttribute Persona persona,Model model) {
 		String mensaje="";
 		persona.setActivo_per("a");
