@@ -76,44 +76,44 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-     <form action="/productos/mantenimiento" method="post">
+     <form action="/persona/guardar" method="post"  th:object="${persona}" >
        <div>
           <label>Id Persona</label>
-          <input type="text" class="form-control" readonly  />
+          <input type="text" class="form-control" readonly  th:field="*{id_per}" id="id_per" />
          </div>
          
           <div>
           <label>Nombre</label>
-          <input type="text" class="form-control"  />
+          <input type="text" class="form-control"  th:field="*{nom_per}" id="nombre_per"  />
          </div>
          
           <div>
           <label>Apellido paterno</label>
-          <input type="text" class="form-control"  />
+          <input type="text" class="form-control"  th:field="*{apepat_per}" id="apepat_per"  />
          </div>
          
             
           <div>
           <label>Apellido materno</label>
-          <input type="text" class="form-control"  />
+          <input type="text" class="form-control"  th:field="*{apemat_per}" id="apemat_per"  />
          </div>
          
           <div>
           <label>Correo</label>
-          <input type="text" class="form-control"  />
+          <input type="text" class="form-control"  th:field="*{correo_per}" id="correo_per"  />
          </div>
          
           <div>
           <label>Direccion</label>
-          <textarea type="text" class="form-control"  ></textarea>
+          <textarea type="text" class="form-control" th:field="*{dir_per}" id="dir_per"   ></textarea>
          </div>
          
           <div>
           <label>Es cliente?</label>
-          <select class="form-control">
-          	<option>--Seleccione--</option>
-          	<option>Si</option>
-          	<option>No</option>
+          <select class="form-control" th:field="*{flagcliente_per}"  >
+          	<option value="">--Seleccione--</option>
+          	<option value="1">Si</option>
+          	<option value="0">No</option>
           	
           </select>
          </div>
