@@ -1,10 +1,13 @@
 package com.dawi.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.dawi.models.Persona;
 import com.dawi.repository.IPersonaRepository;
 import com.dawi.repository.ProductoRepository;
 
@@ -16,10 +19,15 @@ public class PersonaController {
 	
 	@GetMapping("/persona")
 	public String paginapersona(Model model) {
+		ArrayList<Persona> lista=new ArrayList<Persona> ();
 		var personas=personaRepo.findAll();
-		model.addAttribute("personas",personas);
+		for (Persona persona : personas) {
+			if(persona.getActivo_per().equals("a")) {
+				lista.add(persona);
+			}
+		}
+		model.addAttribute("personas",lista);
 		return "crudpersona";
-
 	}
 	
 }
