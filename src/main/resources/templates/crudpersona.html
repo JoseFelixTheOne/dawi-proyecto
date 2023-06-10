@@ -170,6 +170,14 @@
     		  Error(errores)
     		  return;
     	  }
+    	  
+    	  Confirmacion("Confirmacion","Desea guardar los datos de la persona",function(){
+      			var frmPersona=document.getElementById("frmPersona")
+      			frmPersona.submit()
+        		Exito("Se guardo con exito")
+      	  })	  
+    	  
+    	  
     	}
     
 

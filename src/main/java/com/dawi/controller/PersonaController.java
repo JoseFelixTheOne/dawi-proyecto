@@ -36,10 +36,7 @@ public class PersonaController {
 	@GetMapping("/persona")
 	public String paginapersona(Model model) {
 		model.addAttribute("personas",listarPersonas());
-		Persona op=new Persona();
-		op.setActivo_per("a");
-		op.setId_per(0);
-		model.addAttribute("persona", op);
+		model.addAttribute("persona", new Persona());
 		return "crudpersona";
 	}
 	
@@ -48,13 +45,24 @@ public class PersonaController {
 		Persona opersona= personaRepo.findById(id).orElse(new Persona());
 		opersona.setActivo_per("d");
 		personaRepo.save(opersona);
+		model.addAttribute("persona", new Persona());
 		model.addAttribute("personas",listarPersonas());
 		return "crudpersona";
 	}
 	
 	@PostMapping("/persona/guardar")
-	public String guardarPersona(@ModelAttribute Persona persona) {
-		
+	public String guardarPersona(@ModelAttribute Persona persona,Model model) {
+		String mensaje="";
+		persona.setActivo_per("a");
+        try {
+        	personaRepo.save(persona);
+            mensaje = "Registro exitosa";
+        } catch(Exception e) {
+            mensaje = "Error al guardar";
+        }
+		model.addAttribute("personas",listarPersonas());
+        model.addAttribute("mensaje", mensaje);
+
 		return "crudpersona";
 	}
 	
