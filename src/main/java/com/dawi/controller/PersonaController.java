@@ -17,8 +17,8 @@ public class PersonaController {
 	@Autowired
 	private IPersonaRepository personaRepo;
 	
-	@GetMapping("/persona")
-	public String paginapersona(Model model) {
+	
+	private ArrayList<Persona> listarPersonas() {
 		ArrayList<Persona> lista=new ArrayList<Persona> ();
 		var personas=personaRepo.findAll();
 		for (Persona persona : personas) {
@@ -26,8 +26,17 @@ public class PersonaController {
 				lista.add(persona);
 			}
 		}
-		model.addAttribute("personas",lista);
+		return lista;
+	}
+	
+	@GetMapping("/persona")
+	public String paginapersona(Model model) {
+		
+		model.addAttribute("personas",listarPersonas());
 		return "crudpersona";
 	}
+	
+	
+	
 	
 }
