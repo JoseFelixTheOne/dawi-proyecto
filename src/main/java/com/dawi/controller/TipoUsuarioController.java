@@ -42,7 +42,6 @@ public class TipoUsuarioController {
 		String mensaje = "";
 		tipo.setActivo_tipousu("a");
 		try {
-			System.out.println("Entro al metodo");
 			tipoUsuRepo.save(tipo);
 			mensaje = "Registro exitoso";
 			
