@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawi.models.TipoUsuario;
 import com.dawi.repository.ITipoPersonaRepository;
@@ -51,6 +52,19 @@ public class TipoUsuarioController {
 		model.addAttribute("tipos", listarTiposUsuario());
 		model.addAttribute("tipo", new TipoUsuario());
 		model.addAttribute("mensaje", mensaje);
+		return "crudtipo";
+	}
+	@PostMapping("/tipousuario/eliminar")
+	public String eliminarTipo(@RequestParam("id") int id, Model model) {
+		TipoUsuario xtipo = tipoUsuRepo.findById(id).orElse(new TipoUsuario());
+		xtipo.setActivo_tipousu("i");
+		try {
+			tipoUsuRepo.save(xtipo);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		model.addAttribute("tipos", listarTiposUsuario());
+		model.addAttribute("tipo", new TipoUsuario());
 		return "crudtipo";
 	}
 }
