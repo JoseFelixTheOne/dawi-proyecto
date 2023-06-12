@@ -94,7 +94,7 @@ public class UsuarioController {
 		return "crudusuario";
 	}
 	
-	@PostMapping("/usuario")
+	@PostMapping("/usuarioguardar")
 	public String guardarUsuario(@ModelAttribute Usuario usuario,Model model) {
 		String mensaje="";
 		usuario.setActivo_usu("a");
@@ -111,16 +111,17 @@ public class UsuarioController {
         		Usuario ousuario= usuarioRepo.findById(usuario.getId_usu()).orElse(new Usuario());
         		ousuario.setNom_usu(usuario.getNom_usu());
         		ousuario.setId_tipousu(usuario.getId_tipousu());
+        		System.out.println("Id tipo usuario "+usuario.getId_tipousu());
             	usuarioRepo.save(ousuario);        		
         	}
             mensaje = "Registro exitosa";
         } catch(Exception e) {
             mensaje = "Error al guardar";
         }
-    	model.addAttribute("usuarios",listarUsuarios());
 		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("personas", listarPersonas());
 		model.addAttribute("tipousuarios", listarTiposUsuario());
+    	model.addAttribute("usuarios",listarUsuarios());
 
 		return "crudusuario";
 	}

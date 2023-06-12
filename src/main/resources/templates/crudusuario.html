@@ -25,7 +25,7 @@
 			<th style="display:none">Id Usuario</th>
 			<th>Nombre Persona</th>
 			<th>Nombre Usuario</th>
-			<th>Tipo Usuario</th>
+			<th style="display:none">Tipo Usuario</th>
 			<th style="display:none">Id Tipo Usuario</th>
 			<th>Operaciones</th>
 		</tr>
@@ -35,9 +35,9 @@
 	
 		<tr th:each="p : ${usuarios}" >
 			<td style="display:none" th:text="${p.id_usu}" ></td>
-			<td th:text="${p.opersona.nom_per}" ></td>
+			<td th:text="${p.opersona.nom_per}+ ' ' +${p.opersona.apepat_per} + ' '+ ${p.opersona.apemat_per}" ></td>
 			<td th:text="${p.nom_usu}" ></td>
-			<td th:text="${p.otipousuario.nom_tipousu}" ></td>
+			<td style="display:none" th:text="${p.otipousuario.nom_tipousu}" ></td>
 			<td style="display:none" th:text="${p.id_tipousu}" ></td>
 			<!--  <td th:text="${p.correo_per}" ></td>
 			<td style="display:none" th:text="${p.dir_per}" ></td>
@@ -85,7 +85,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-     <form action="/usuario" method="post" id="frmUsuario"  th:object="${usuario}" >
+     <form action="/usuarioguardar" method="post" id="frmUsuario"  th:object="${usuario}" >
          <div style="display:none">
           <label>Id Usuario</label>
           <input type="text" class="form-control" readonly  th:field="*{id_usu}" id="id_usu" />
