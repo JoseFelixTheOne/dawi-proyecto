@@ -97,7 +97,7 @@
          
           <div>
           <label>Ingrese contraseña</label>
-          <input type="text" class="form-control ob" 
+          <input type="password" class="form-control ob" 
           data-mensaje="contraseña del usuario"
            th:field="*{contra_usu}" id="contra_usu"  />
          </div>
@@ -105,16 +105,21 @@
             
           <div>
           <label>Seleccione una persona</label>
-          <input type="text" class="form-control ob" 
-            data-mensaje="seleccionar una persona"
-           th:field="*{id_per}" id="id_per"  />
+          
+          <select th:field="*{id_per}"  class="form-control ob"  >
+          	<option value="0">--Seleccione--</option>
+		    <option th:each="option : ${personas}" th:value="${option.id_per}" th:text="${option.nom_per}"></option>
+ 		  </select>
+
          </div>
          
           <div>
           <label>Seleccione una tipo usuario</label>
-          <input type="text" class="form-control ob"
-                    data-mensaje="correo de la persona"
-            th:field="*{id_tipousu}" id="id_tipousu"  />
+
+             <select th:field="*{id_tipousu}"  class="form-control ob"  >
+          	<option value="0">--Seleccione--</option>
+		    <option th:each="option : ${tipousuarios}" th:value="${option.id_tipousu}" th:text="${option.nom_tipousu}"></option>
+ 		  </select>
          </div>
          
          
@@ -147,7 +152,7 @@
     	
     	function Nuevo(){
     		LimpiarDatos("frmPersona");
-    		setI("lbltitulo","Agregar nueva persona ");
+    		setI("lbltitulo","Agregar nueva usuario ");
     		document.getElementById("id_per").value="0"
     	}
     	
@@ -167,7 +172,7 @@
     	}
     	
     	function Editar(id,btn){
-    		setI("lbltitulo","Editar Persona ");
+    		setI("lbltitulo","Editar Usuario ");
     		var fila= btn.parentNode.parentNode;
     		var nombre=fila.children[0].innerHTML;
     		var appaterno=fila.children[1].innerHTML;
