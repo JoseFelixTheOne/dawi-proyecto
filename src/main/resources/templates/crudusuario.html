@@ -8,6 +8,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container">
+
 
 		<h1 class="text-center">Mantenimiento Usuario</h1>
 	
@@ -106,9 +108,10 @@
           <div>
           <label>Seleccione una persona</label>
           
-          <select th:field="*{id_per}"  class="form-control ob"  >
+          <select th:field="*{id_per} "  class="form-control ob"  >
           	<option value="0">--Seleccione--</option>
-		    <option th:each="option : ${personas}" th:value="${option.id_per}" th:text="${option.nom_per}"></option>
+		    <option th:each="option : ${personas}" th:value="${option.id_per}"
+		     th:text="${option.nom_per} + ' '+${option.apepat_per} + ' '+${option.apemat_per}"></option>
  		  </select>
 
          </div>
