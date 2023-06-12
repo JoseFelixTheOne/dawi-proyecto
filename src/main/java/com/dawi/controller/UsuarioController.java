@@ -98,7 +98,7 @@ public class UsuarioController {
 	public String guardarUsuario(@ModelAttribute Usuario usuario,Model model) {
 		String mensaje="";
 		usuario.setActivo_usu("a");
-        try {
+		try {
         	if(usuario.getId_usu()==0) {
         		String contra= hashSHA256(usuario.getContra_usu());
         		usuario.setContra_usu(contra);
@@ -109,9 +109,9 @@ public class UsuarioController {
 
         	}else {
         		Usuario ousuario= usuarioRepo.findById(usuario.getId_usu()).orElse(new Usuario());
-        		ousuario.setNom_usu(ousuario.getNom_usu());
-        		ousuario.setId_tipousu(ousuario.getId_tipousu());
-            	usuarioRepo.save(usuario);        		
+        		ousuario.setNom_usu(usuario.getNom_usu());
+        		ousuario.setId_tipousu(usuario.getId_tipousu());
+            	usuarioRepo.save(ousuario);        		
         	}
             mensaje = "Registro exitosa";
         } catch(Exception e) {

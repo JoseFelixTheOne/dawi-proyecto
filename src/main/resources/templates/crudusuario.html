@@ -22,6 +22,7 @@
 	
 	<thead>
 		<tr>
+			<th style="display:none">Id Usuario</th>
 			<th>Nombre Persona</th>
 			<th>Nombre Usuario</th>
 			<th>Tipo Usuario</th>
@@ -33,6 +34,7 @@
 	<tbody>
 	
 		<tr th:each="p : ${usuarios}" >
+			<td style="display:none" th:text="${p.id_usu}" ></td>
 			<td th:text="${p.opersona.nom_per}" ></td>
 			<td th:text="${p.nom_usu}" ></td>
 			<td th:text="${p.otipousuario.nom_tipousu}" ></td>
@@ -96,7 +98,7 @@
            th:field="*{nom_usu}" id="nom_usu"  />
          </div>
          
-          <div>
+          <div id="divcontra">
           <label>Ingrese contraseña</label>
           <input type="password" class="form-control ob" 
           data-mensaje="contraseña del usuario"
@@ -104,7 +106,7 @@
          </div>
          
             
-          <div>
+          <div id="divpersona">
           <label>Seleccione una persona</label>
           
           <select th:field="*{id_per} "  class="form-control ob"  >
@@ -153,9 +155,11 @@
     	}
     	
     	function Nuevo(){
+    		setD("divcontra","block")
+    		setD("divpersona","block")
     		LimpiarDatos("frmPersona");
-    		setI("lbltitulo","Agregar nueva usuario ");
-    		document.getElementById("id_per").value="0"
+    		setI("lbltitulo","Agregar nuevo usuario ");
+    		document.getElementById("id_usu").value="0"
     	}
     	
     	function Guardar(){
@@ -174,21 +178,20 @@
     	}
     	
     	function Editar(id,btn){
+    		//divcontra
+    		//divpersona
+    		setD("divcontra","none")
+    		setD("divpersona","none")
     		setI("lbltitulo","Editar Usuario ");
     		var fila= btn.parentNode.parentNode;
-    		var nombre=fila.children[0].innerHTML;
-    		var appaterno=fila.children[1].innerHTML;
-    		var apmaterno=fila.children[2].innerHTML;
-    		var correo=fila.children[3].innerHTML;
-    		var direccion=fila.children[4].innerHTML;
-    		var flag=fila.children[5].innerHTML;
-			set("id_per",id)
-			set("nombre_per",nombre)
-			set("apepat_per",appaterno)
-			set("apemat_per",apmaterno)
-			set("correo_per",correo)
-			set("dir_per",direccion)
-			set("cboOpcion",flag)
+    		var nom_usu=fila.children[2].innerHTML;
+    		var id_tipousu=fila.children[4].innerHTML;
+
+			set("id_usu",id)
+			set("nom_usu",nom_usu)
+
+			set("id_tipousu",id_tipousu)
+
 
     	}
     
