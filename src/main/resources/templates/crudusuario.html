@@ -160,15 +160,15 @@
     	}
     	
     	function Guardar(){
-    	  var errores=	ValidarDatos("frmPersona")
+    	  var errores=	ValidarDatos("frmUsuario")
     	  if(errores!=""){
     		  Error(errores)
     		  return;
     	  }
     	  
     	  Confirmacion("Confirmacion","Desea guardar los datos de la persona",function(){
-      			var frmPersona=document.getElementById("frmPersona")
-      			frmPersona.submit()
+      			var frmUsuario=document.getElementById("frmUsuario")
+      			frmUsuario.submit()
         		Exito("Se guardo con exito")
       	  })	  
     	     	  
