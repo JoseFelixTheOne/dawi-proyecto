@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawi.models.Persona;
 import com.dawi.models.TipoUsuario;
@@ -79,6 +80,19 @@ public class UsuarioController {
 		return lista;
 	}
 	
+	
+	@PostMapping("/usuarioeliminar")
+	public String eliminarUsuario(@RequestParam("id") int id, Model model) {
+		System.out.println("Id usuario:"+id);
+		Usuario ousuario= usuarioRepo.findById(id).orElse(new Usuario());
+		ousuario.setActivo_usu("d");
+		usuarioRepo.save(ousuario);
+		model.addAttribute("usuarios",listarUsuarios());
+		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("personas", listarPersonas());
+		model.addAttribute("tipousuarios", listarTiposUsuario());
+		return "crudusuario";
+	}
 	
 	@PostMapping("/usuario")
 	public String guardarUsuario(@ModelAttribute Usuario usuario,Model model) {
