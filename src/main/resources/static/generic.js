@@ -9,6 +9,11 @@ function set(idcontrol, valor) {
     if (document.getElementById(idcontrol))
         document.getElementById(idcontrol).value = valor;
 }
+function setD(idcontrol, valor) {
+    if (document.getElementById(idcontrol))
+        document.getElementById(idcontrol).style.display = valor;
+}
+
 function setI(idcontrol, valor) {
     if (document.getElementById(idcontrol))
         document.getElementById(idcontrol).innerHTML = valor;

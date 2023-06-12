@@ -28,6 +28,8 @@ public class Persona {
 	
 	private String flagcliente_per;
 
+	private int btieneusuario;
+
 
 
 	

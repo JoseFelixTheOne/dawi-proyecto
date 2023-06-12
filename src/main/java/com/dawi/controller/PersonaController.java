@@ -53,7 +53,19 @@ public class PersonaController {
 		String mensaje="";
 		persona.setActivo_per("a");
         try {
-        	personaRepo.save(persona);
+        	if(persona.getId_per()==0) {
+        		persona.setBtieneusuario(0);
+            	personaRepo.save(persona);        		
+        	}else {
+        		Persona opersona= personaRepo.findById(persona.getId_per()).orElse(new Persona());
+        		opersona.setNom_per(persona.getNom_per());
+        		opersona.setApepat_per(persona.getApepat_per());
+        		opersona.setApemat_per(persona.getApemat_per());
+        		opersona.setCorreo_per(persona.getCorreo_per());
+        		opersona.setDir_per(persona.getDir_per());
+        		opersona.setFlagcliente_per(persona.getFlagcliente_per());
+            	personaRepo.save(opersona);        		
+        	}
             mensaje = "Registro exitosa";
         } catch(Exception e) {
             mensaje = "Error al guardar";
