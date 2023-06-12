@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawi.models.Persona;
-import com.dawi.models.Producto;
 import com.dawi.repository.IPersonaRepository;
-import com.dawi.repository.ProductoRepository;
 
 @Controller
 public class PersonaController {
