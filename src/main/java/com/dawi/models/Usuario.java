@@ -18,6 +18,7 @@ public class Usuario {
 	private String contra_usu;
 	private int id_per;
 	private int id_tipousu;
+	private String activo_usu;
 
 	@ManyToOne
 	@JoinColumn(name = "id_per",insertable = false,updatable = false)
