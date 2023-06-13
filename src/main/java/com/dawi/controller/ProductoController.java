@@ -123,7 +123,7 @@ public class ProductoController {
 		}catch(Exception e) {
 			mensaje = "Error al guardar";
 		}
-		cargarCombos(model);
+		model.addAttribute("lstCategorias", catRepo.findAll());
 		model.addAttribute("productos", lstProductos());
 		model.addAttribute("mensaje", mensaje);
 		

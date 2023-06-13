@@ -46,7 +46,7 @@
 					<th>Stock</th>
 					<th>Precio</th>
 					<th>Categoria</th>
-					<!--<th style="display: none">Activo</th> -->
+					<th style="display: none">Codigo Categoria</th>
 					<th>Imagen</th>
 					<th>Operaciones</th>
 				</tr>
@@ -56,10 +56,10 @@
 
 				<tr th:each="p : ${productos}">
 					<td th:text="${p.nom_prod}"></td>
-					<td th:text="${p.prec_prod}"></td>
 					<td th:text="${p.stock_prod}"></td>
+					<td th:text="${p.prec_prod}"></td>
 					<td th:text="${p.getObjCate().getNom_cat()}"></td>
-					<!-- d style="display: none" th:text="${p.activo_prod}"></td>-->
+					<td style="display: none" th:text="${p.id_cat}"></td>
 					<td th:text="${p.imagen_prod}"></td>
 
 					<td>
@@ -139,22 +139,12 @@
 								<label>Categoria</label> <select class="form-control ob"
 									data-mensaje="categoria del producto" id="cboOpcionCat"
 									th:field="*{id_cat}">
-									<option value="0">--Seleccione--</option>
+									<option value="-1">--Seleccione--</option>
 									<option th:each="c : ${lstCategorias}" th:value="${c.id_cat}"
 										th:text="${c.nom_cat}"></option>
 								</select>
 							</div>
 
-							<!-- div>
-								<label>Activo</label> <select class="form-control ob"
-									data-mensaje="si esta activo o no" id="cboOpcionEst"
-									th:field="*{activo_prod}">
-									<option value="">--Seleccione--</option>
-									<option value="1">Si</option>
-									<option value="0">No</option>
-
-								</select>
-							</div>-->
 
 							<div class="mb-3">
 								<label for="formFileSm" class="form-label">Imagen </label> <input
@@ -221,15 +211,13 @@
 			var producto = fila.children[0].innerHTML;
 			var stock = parseInt(fila.children[1].innerHTML, 10);
 			var precio = parseFloat(fila.children[2].innerHTML);
-			var categoria = fila.children[3].innerHTML;
-			/*var estado = fila.children[4].innerHTML;*/
+			var idcategoria = fila.children[4].innerHTML;
 			var imagen = fila.children[5].innerHTML;
 			set("id_prod", id)
 			set("nombre_prod", producto)
 			set("stock_prod", stock)
 			set("prec_prod", precio)
-			set("cboOpcionCat", categoria)
-			/*set("cboOpcionEst", estado)*/
+			set("cboOpcionCat", idcategoria)
 			set("imagen_prod", imagen)
 
 		}
