@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dawi.models.Producto;
 import com.dawi.repository.CategoriaRepository;
@@ -104,17 +105,17 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/producto/eliminar")
-	public String eliminarProducto(@RequestParam("id") int id, Model model) {
+	public String eliminarProducto(@RequestParam("id") int id, Model model, RedirectAttributes redirectAttributes) {
 		Producto producto = prodRepo.findById(id).orElse(new Producto());
 		producto.setActivo_prod("d");
 		prodRepo.save(producto);
 		model.addAttribute("producto", new Producto());
 		model.addAttribute("productos", lstProductos());
-		return "crudproductos";
+		return "redirect:/crud/producto";
 	}
 	
 	@PostMapping("/crud/producto/guardar")
-	public String guardarProducto(@ModelAttribute Producto producto, Model model) {
+	public String guardarProducto(@ModelAttribute Producto producto, Model model, RedirectAttributes redirectAttributes) {
 		String mensaje = "";
 		producto.setActivo_prod("a");
 		try {
@@ -127,7 +128,8 @@ public class ProductoController {
 		model.addAttribute("productos", lstProductos());
 		model.addAttribute("mensaje", mensaje);
 		
-		return "crudproductos";
+		redirectAttributes.addFlashAttribute("mensaje", mensaje);
+		return "redirect:/crud/producto";
 	}
 	
 	void cargarCombos(Model model) {
