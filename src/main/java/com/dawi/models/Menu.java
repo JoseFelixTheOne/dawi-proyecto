@@ -11,7 +11,7 @@ import lombok.Data;
 public class Menu {
 	@Id
 	private int id_menu;
-	private String nombreOpcion_menu;
-	private String iconoOpcion_menu;
+	private String nombreopcion_menu;
+	private String iconoopcion_menu;
 	private String activo_menu;
 }

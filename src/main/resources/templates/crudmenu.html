@@ -5,7 +5,10 @@
 <title>Mantenimiento Menu</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-<script src="https://kit.fontawesome.com/c0e26baa3d.js" crossorigin="anonymous"></script>    
+<script src="https://kit.fontawesome.com/c0e26baa3d.js" crossorigin="anonymous"></script>   
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+ 
 </head>
 <body>
 
@@ -32,9 +35,9 @@
 	<tbody>
 	
 		<tr th:each="m : ${menus}" >
-			<td th:text="${m.nombreOpcion_menu}" ></td>
-			<td><i th:class="${m.iconoOpcion_menu}"></i></td>
-			<td style="display: none;" th:text="${m.iconoOpcion_menu}" ></td>
+			<td th:text="${m.nombreopcion_menu}" ></td>
+			<td><i th:class="${m.iconoopcion_menu}"></i></td>
+			<td style="display: none;" th:text="${m.iconoopcion_menu}" ></td>
 			
 			<td >
 				<button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" 
@@ -88,14 +91,14 @@
           <label>Nombre de la Opción</label>
           <input type="text" class="form-control ob" 
           	 data-mensaje="nombre de la opcion"
-           th:field="*{nombreOpcion_menu}" id="nombreOpcion_menu"  />
+           th:field="*{nombreopcion_menu}" id="nombreopcion_menu"  />
          </div>
          
           <div>
           <label>Seleccione un icono</label>
-          <select th:field="*{iconoOpcion_menu} "  class="form-control ob" id="cboIcono" >
+          <select th:field="*{iconoopcion_menu} "  class="form-control ob" id="cboIcono" >
           	<option value="0">--Seleccione--</option>
-		    <option th:each="i : ${iconos}" th:value="${i}" class="${i}"></option>
+		    <option th:each="i : ${iconos}" th:value="${i}" th:text="${i}"></option>
  		  </select>
 
          </div>
@@ -160,7 +163,7 @@
     		var nombre=fila.children[0].innerHTML;
     		var menu=fila.children[2].innerHTML;
 			set("id_menu",id)
-			set("nombreOpcion_menu",nombre)
+			set("nombreopcion_menu",nombre)
 			set("cboIcono",menu)
     	}
     

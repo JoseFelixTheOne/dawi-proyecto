@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;import com.dawi.models.Menu;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.dawi.models.Menu;
+import com.dawi.models.TipoUsuario;
 import com.dawi.repository.IMenuRepository;
 
 @Controller
@@ -36,6 +41,23 @@ public class MenuController {
 		model.addAttribute("menus", listarMenus());
 		model.addAttribute("menu", new Menu());
 		model.addAttribute("iconos", iconList);
+		return "crudmenu";
+	}
+	@PostMapping("/menu")
+	public String registrarMenu(@ModelAttribute Menu menu ,Model model) {
+		String mensaje = "";
+		menu.setActivo_menu("a");
+		try {
+			menuRepo.save(menu);
+			mensaje = "Registro exitoso";
+			
+		} catch (Exception e) {
+			mensaje = "Error al guardar";
+		}
+		model.addAttribute("menus", listarMenus());
+		model.addAttribute("menu", new Menu());
+		model.addAttribute("iconos", iconList);
+		model.addAttribute("mensaje", mensaje);
 		return "crudmenu";
 	}
 }
