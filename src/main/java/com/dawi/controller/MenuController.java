@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawi.models.Menu;
 import com.dawi.models.TipoUsuario;
@@ -38,9 +39,7 @@ public class MenuController {
 	
 	@GetMapping("/menu")
 	public String cargarMenu(Model model) {
-		model.addAttribute("menus", listarMenus());
-		model.addAttribute("menu", new Menu());
-		model.addAttribute("iconos", iconList);
+		envioAtributos(model);
 		return "crudmenu";
 	}
 	@PostMapping("/menu")
@@ -54,10 +53,28 @@ public class MenuController {
 		} catch (Exception e) {
 			mensaje = "Error al guardar";
 		}
+
+		envioAtributos(model);
+		model.addAttribute("mensaje", mensaje);
+		return "crudmenu";
+	}
+	@PostMapping("/menu/eliminar")
+	public String eliminarMenu(@RequestParam("id") int id, Model model) {
+		Menu xmenu = menuRepo.findById(id).orElse(new Menu());
+		xmenu.setActivo_menu("i");
+		try {
+			menuRepo.save(xmenu);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		envioAtributos(model);
+		return "crudmenu";
+	}
+	
+	//metodos comunes
+	public void envioAtributos(Model model) {
 		model.addAttribute("menus", listarMenus());
 		model.addAttribute("menu", new Menu());
 		model.addAttribute("iconos", iconList);
-		model.addAttribute("mensaje", mensaje);
-		return "crudmenu";
 	}
 }
