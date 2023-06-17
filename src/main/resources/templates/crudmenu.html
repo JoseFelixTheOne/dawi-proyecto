@@ -28,7 +28,7 @@
 			<th>Nombre</th>
 			<th>Icono</th>
 			<th style="display: none;">Icono Texto</th>
-			<th>Operaciones</th>
+			<th style="text-align: center;">Operaciones</th>
 		</tr>
 	</thead>
 	
@@ -39,7 +39,7 @@
 			<td><i th:class="${m.iconoopcion_menu}"></i></td>
 			<td style="display: none;" th:text="${m.iconoopcion_menu}" ></td>
 			
-			<td >
+			<td style="text-align: center;">
 				<button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" 
 					th:attr="onclick=|Editar(${m.id_menu},this)|"
 				 >

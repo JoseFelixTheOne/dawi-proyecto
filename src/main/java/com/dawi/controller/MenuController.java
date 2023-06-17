@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawi.models.Menu;
-import com.dawi.models.TipoUsuario;
 import com.dawi.repository.IMenuRepository;
 
 @Controller
@@ -20,7 +19,7 @@ public class MenuController {
 	@Autowired
 	private IMenuRepository menuRepo;
 	
-	private String[] iconList = {"fa-solid fa-house","fa-solid fa-magnifying-glass","fa-solid fa-user","fa-solid fa-file-chart-column","fa-solid fa-arrow-right-from-bracket","fa-solid fa-gear","fa-solid fa-person","fa-solid fa-square-list","fa-solid fa-user-plus","fa-solid fa-user-tag","fa-solid fa-grid-2-plus","fa-solid fa-tag","fa-solid fa-box"};
+	private String[] iconList = {"fa-solid fa-house","fa-solid fa-magnifying-glass","fa-solid fa-user","fa-solid fa-file-pdf","fa-solid fa-arrow-right-from-bracket","fa-solid fa-gear","fa-solid fa-person","fa-solid fa-list-ul","fa-solid fa-user-plus","fa-solid fa-user-tag","fa-solid fa-bars","fa-solid fa-tag","fa-solid fa-box"};
 
 	private ArrayList<Menu> listarMenus(){
 		ArrayList<Menu> lista = new ArrayList<Menu>();
