@@ -153,11 +153,6 @@
 
 
 
-
-
-
-
-<<<<<<< HEAD
 	<script src="/jquery.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -165,60 +160,7 @@
 		crossorigin="anonymous"></script>
 	<script src="/sweetalert.js"></script>
 	<script src="/generic.js"></script>
-=======
-    <script src="/jquery.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="/sweetalert.js"></script>
-    <script src="/generic.js"></script>
-    
-    <script>
-    
-    	function Eliminar(id){
-        	Confirmacion("Confirmacion","Desea eliminar realmente a la persona",function(){
-        		set("txtidmenu",id)
-        		Exito("Se elimino correctamente")
-        		document.getElementById("txtboton").click()
-        	})	    		
-    	}
-    	
-    	function Nuevo(){
-    		LimpiarDatos("frmPersona");
-    		setI("lbltitulo","Agregar nueva persona ");
-    		document.getElementById("id_per").value="0"
-    	}
-    	
-    	function Guardar(){
-    	  var errores=	ValidarDatos("frmPersona")
-    	  if(errores!=""){
-    		  Error(errores)
-    		  return;
-    	  }
-    	  
-    	  Confirmacion("Confirmacion","Desea guardar los datos de la persona",function(){
-      			var frmPersona=document.getElementById("frmPersona")
-      			frmPersona.submit()
-        		Exito("Se guardo con exito")
-      	  })	  
-    	     	  
-    	}
-    	
-    	function Editar(id,btn){
-    		setI("lbltitulo","Editar Persona ");
-    		var fila= btn.parentNode.parentNode;
-    		var nombre=fila.children[0].innerHTML;
-    		var appaterno=fila.children[1].innerHTML;
-    		var apmaterno=fila.children[2].innerHTML;
-    		var correo=fila.children[3].innerHTML;
-    		var direccion=fila.children[4].innerHTML;
-    		var flag=fila.children[5].innerHTML;
-			set("id_per",id)
-			set("nombre_per",nombre)
-			set("apepat_per",appaterno)
-			set("apemat_per",apmaterno)
-			set("correo_per",correo)
-			set("dir_per",direccion)
-			set("cboOpcion",flag)
->>>>>>> remotes/origin/menu
+
 
 	<script>
 		function Eliminar(id) {
