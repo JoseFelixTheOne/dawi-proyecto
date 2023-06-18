@@ -31,6 +31,28 @@ public class PersonaController {
 		return lista;
 	}
 	
+	private ArrayList<Persona> filtrarPersonas(String nombrecompleto) {
+		ArrayList<Persona> lista=new ArrayList<Persona> ();
+		var personas=personaRepo.findAll();
+		for (Persona persona : personas) {
+			if(persona.getActivo_per().equals("a")  && 
+					(persona.getNom_per()+" "+persona.getApepat_per()+" "+persona.getApemat_per())
+					.toUpperCase().contains(nombrecompleto.toUpperCase())
+					) {
+				lista.add(persona);
+			}
+		}
+		return lista;
+	}
+	
+	@PostMapping("/persona/filtro")
+	public String paginapersonaFiltro(Model model,@RequestParam(name = "txtnombrecompletofiltro") String nombrecompleto) {
+		model.addAttribute("personas",filtrarPersonas(nombrecompleto));
+		model.addAttribute("persona", new Persona());
+		model.addAttribute("personabusqueda", nombrecompleto);
+		return "crudpersona";
+	}
+	
 	@GetMapping("/persona")
 	public String paginapersona(Model model) {
 		model.addAttribute("personas",listarPersonas());

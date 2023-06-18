@@ -24,10 +24,10 @@
 		<form action="/reports/filtro" method="post" class="mt-4">
 				
 			<div class="input-group mb-3">
-  				<input type="text" class="form-control" placeholder="Ingrese Nombre" 
-  						name="txtnombrecompleto"
+  				<input type="text" class="form-control" placeholder="Ingrese Nombre"  id="txtnombrecompleto"
+  						name="txtnombrecompleto" th:value="${personabusqueda}"
   				aria-label="Recipient's username" aria-describedby="button-addon2">
- 				 <!-- <button class="btn btn-dark" type="submit" id="button-addon2">Buscar</button> -->
+ 				  <button onclick="Buscar()" class="btn btn-dark" type="button" id="button-addon2">Buscar</button> 
  				 <button class="btn btn-primary" type="submit" id="button-addon2">PDF</button>
 			</div>
 		
@@ -228,6 +228,26 @@
 			set("cboOpcion", flag)
 
 		}
+		
+		function Buscar(){
+			if(document.getElementById("frmFiltro")){
+				var form=document.getElementById("frmFiltro")
+	            document.body.removeChild(form)
+			}
+			var nombrecompleto=document.getElementById("txtnombrecompleto").value
+			var form=document.createElement("form")
+			form.id="frmFiltro"
+			form.method="post";
+			form.action="/persona/filtro";
+			var inputNombreCompleto = document.createElement("input");
+			inputNombreCompleto.setAttribute("type", "hidden");
+			inputNombreCompleto.setAttribute("name", "txtnombrecompletofiltro");
+			inputNombreCompleto.setAttribute("value", nombrecompleto);
+            form.appendChild(inputNombreCompleto);
+            document.body.appendChild(form)
+            form.submit();
+		}
+		
 	</script>
 
 
