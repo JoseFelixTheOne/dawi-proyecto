@@ -13,10 +13,25 @@
 		<h1 class="text-center">Mantenimiento Persona</h1>
 
 		<!-- Button trigger modal -->
-		<button onclick="Nuevo()" type="button" class="btn btn-primary"
+		<div class="d-flex justify-content-center mt-4">
+		  <button onclick="Nuevo()" type="button" class="btn btn-success mr-2" style="transform:translateX(-10px)"
 			data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 			Nuevo</button>
-		<a class="btn btn-primary" target="_blank" href="/reports/listado"> Exportar Todo PDF </a>
+		<a class="btn btn-primary mr-2" target="_blank" href="/reports/listado"> Exportar Todo PDF </a>
+		</div>
+
+		
+		<form action="/reports/filtro" method="post" class="mt-4">
+				
+			<div class="input-group mb-3">
+  				<input type="text" class="form-control" placeholder="Ingrese Nombre" 
+  						name="txtnombrecompleto"
+  				aria-label="Recipient's username" aria-describedby="button-addon2">
+ 				 <!-- <button class="btn btn-dark" type="submit" id="button-addon2">Buscar</button> -->
+ 				 <button class="btn btn-primary" type="submit" id="button-addon2">PDF</button>
+			</div>
+		
+		</form>
 
 		<table class="table">
 
