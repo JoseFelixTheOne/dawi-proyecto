@@ -15,12 +15,12 @@ import com.dawi.repository.ITipoPersonaRepository;
 
 @Controller
 public class TipoUsuarioController {
-	
+
 	@Autowired
 	private ITipoPersonaRepository tipoUsuRepo;
-	
+
 	private ArrayList<TipoUsuario> listarTiposUsuario(){
-		ArrayList<TipoUsuario> lista = new ArrayList<TipoUsuario>();
+		ArrayList<TipoUsuario> lista = new ArrayList<>();
 		try {
 			var tipos = tipoUsuRepo.findAll();
 			for(TipoUsuario tipo: tipos) {
@@ -45,7 +45,7 @@ public class TipoUsuarioController {
 		try {
 			tipoUsuRepo.save(tipo);
 			mensaje = "Registro exitoso";
-			
+
 		} catch (Exception e) {
 			mensaje = "Error al guardar";
 		}

@@ -1,5 +1,6 @@
 package com.dawi.models;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -18,7 +19,7 @@ public class Categoria {
 	private String nom_cat;
 	private String desc_cat;
 	private String activo_cat;
-	private String imagen_cat;
-	
+    private byte[] imagen_cat;
+
 
 }
