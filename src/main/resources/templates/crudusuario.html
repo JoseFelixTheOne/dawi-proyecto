@@ -14,9 +14,24 @@
 		<h1 class="text-center">Mantenimiento Usuario</h1>
 	
 	<!-- Button trigger modal -->
+	<div class="d-flex justify-content-center mt-4">
 	<button onclick="Nuevo()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
  	 Nuevo
 	</button>
+	</div>
+
+	
+	<form action="/reports/filtrousuario" method="post" class="mt-4">
+				
+			<div class="input-group mb-3">
+  				<input type="text" class="form-control" placeholder="Ingrese Nombre"  id="txtnombreusuario"
+  						name="txtnombreusuario" th:value="${usuariobusqueda}"
+  				aria-label="Recipient's username" aria-describedby="button-addon2">
+ 				  <button onclick="Buscar()" class="btn btn-dark" type="button" id="button-addon2">Buscar</button> 
+ 				 <button class="btn btn-primary" type="submit" id="button-addon2">PDF</button>
+			</div>
+		
+		</form>
 
 	<table class="table">
 	
@@ -194,6 +209,25 @@
 
 
     	}
+    	
+    	function Buscar(){
+			if(document.getElementById("frmFiltro")){
+				var form=document.getElementById("frmFiltro")
+	            document.body.removeChild(form)
+			}
+			var nombreusuario=document.getElementById("txtnombreusuario").value
+			var form=document.createElement("form")
+			form.id="frmFiltro"
+			form.method="post";
+			form.action="/usuario/filtro";
+			var inputNombreUsuario = document.createElement("input");
+			inputNombreUsuario.setAttribute("type", "hidden");
+			inputNombreUsuario.setAttribute("name", "txtnombreusuario");
+			inputNombreUsuario.setAttribute("value", nombreusuario);
+            form.appendChild(inputNombreUsuario);
+            document.body.appendChild(form)
+            form.submit();
+		}
     
 
     </script>

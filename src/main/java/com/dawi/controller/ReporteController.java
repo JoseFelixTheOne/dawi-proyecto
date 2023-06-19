@@ -61,4 +61,31 @@ public class ReporteController {
 
 	}
 	
+	
+	@PostMapping("/reports/filtrousuario")
+	public void generarPDFListadoFiltroUsu(HttpServletResponse response,@RequestParam(name="txtnombreusuario") String valor) {
+		response.setHeader("Content-Disposition", "attachment; filename=\"reporte.pdf\";");
+		response.setContentType("application/pdf");
+	
+		try {
+		String ru = resourceLoader.getResource("classpath:reportes/reporte_usuario_persona.jasper").getURI().getPath();
+		HashMap parametros = new HashMap<>();
+		parametros.put("p_nombreusuario", valor);
+		// la categoria se obtendrá del combo
+		JasperPrint jasperPrint = JasperFillManager.fillReport(ru, parametros, dataSource.getConnection());
+		OutputStream outStream = response.getOutputStream();
+
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
 }

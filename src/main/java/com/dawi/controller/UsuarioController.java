@@ -32,6 +32,28 @@ public class UsuarioController {
 	private ITipoPersonaRepository tipoUsuRepo;
 
 	
+	private ArrayList<Usuario> filtrarUsuarios(String nombreusuario) {
+		ArrayList<Usuario> lista=new ArrayList<Usuario> ();
+		var usuarios=usuarioRepo.findAll();
+		for (Usuario usuario : usuarios) {
+			if(usuario.getActivo_usu().equals("a") && usuario.getOpersona().getActivo_per().equals("a")
+					&& usuario.getNom_usu().contains(nombreusuario)
+					) {
+				lista.add(usuario);
+			}
+		}
+		return lista;
+	}
+	
+	@PostMapping("/usuario/filtro")
+	public String paginapersonaFiltro(Model model,@RequestParam(name = "txtnombreusuario") String nombreusuario) {
+		model.addAttribute("usuariobusqueda", nombreusuario);
+		model.addAttribute("usuarios",filtrarUsuarios(nombreusuario));
+		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("personas", listarPersonas());
+		return "crudusuario";
+	}
+	
 	@GetMapping("/usuario")
 	public String cargar(Model model) {
 		TipoUsuarioController oTipoUsuarioController=new TipoUsuarioController();
