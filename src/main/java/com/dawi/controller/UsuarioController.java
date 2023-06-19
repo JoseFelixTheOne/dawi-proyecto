@@ -23,7 +23,7 @@ import com.dawi.repository.IUsuarioRepository;
 @Controller
 public class UsuarioController {
 
-	
+
 	@Autowired
 	private IUsuarioRepository usuarioRepo;
 	@Autowired
@@ -65,9 +65,9 @@ public class UsuarioController {
 
 		return "crudusuario";
 	}
-	
+
 	private ArrayList<Usuario> listarUsuarios() {
-		ArrayList<Usuario> lista=new ArrayList<Usuario> ();
+		ArrayList<Usuario> lista=new ArrayList<> ();
 		var usuarios=usuarioRepo.findAll();
 		for (Usuario usuario : usuarios) {
 			if(usuario.getActivo_usu().equals("a") && usuario.getOpersona().getActivo_per().equals("a")) {
@@ -76,9 +76,9 @@ public class UsuarioController {
 		}
 		return lista;
 	}
-	
+
 	private ArrayList<Persona> listarPersonas() {
-		ArrayList<Persona> lista=new ArrayList<Persona> ();
+		ArrayList<Persona> lista=new ArrayList<> ();
 		var personas=personaRepo.findAll();
 		for (Persona persona : personas) {
 			if(persona.getActivo_per().equals("a") && persona.getBtieneusuario()==0 ) {
@@ -87,9 +87,9 @@ public class UsuarioController {
 		}
 		return lista;
 	}
-	
+
 	private ArrayList<TipoUsuario> listarTiposUsuario(){
-		ArrayList<TipoUsuario> lista = new ArrayList<TipoUsuario>();
+		ArrayList<TipoUsuario> lista = new ArrayList<>();
 		try {
 			var tipos = tipoUsuRepo.findAll();
 			for(TipoUsuario tipo: tipos) {
@@ -101,8 +101,8 @@ public class UsuarioController {
 		}
 		return lista;
 	}
-	
-	
+
+
 	@PostMapping("/usuarioeliminar")
 	public String eliminarUsuario(@RequestParam("id") int id, Model model) {
 		System.out.println("Id usuario:"+id);
@@ -115,7 +115,7 @@ public class UsuarioController {
 		model.addAttribute("tipousuarios", listarTiposUsuario());
 		return "crudusuario";
 	}
-	
+
 	@PostMapping("/usuarioguardar")
 	public String guardarUsuario(@ModelAttribute Usuario usuario,Model model) {
 		String mensaje="";
@@ -124,7 +124,7 @@ public class UsuarioController {
         	if(usuario.getId_usu()==0) {
         		String contra= hashSHA256(usuario.getContra_usu());
         		usuario.setContra_usu(contra);
-            	usuarioRepo.save(usuario);        		
+            	usuarioRepo.save(usuario);
         		Persona opersona= personaRepo.findById(usuario.getId_per()).orElse(new Persona());
         		opersona.setBtieneusuario(1);
         		personaRepo.save(opersona);
@@ -134,7 +134,7 @@ public class UsuarioController {
         		ousuario.setNom_usu(usuario.getNom_usu());
         		ousuario.setId_tipousu(usuario.getId_tipousu());
         		System.out.println("Id tipo usuario "+usuario.getId_tipousu());
-            	usuarioRepo.save(ousuario);        		
+            	usuarioRepo.save(ousuario);
         	}
             mensaje = "Registro exitosa";
         } catch(Exception e) {
@@ -147,8 +147,8 @@ public class UsuarioController {
 
 		return "crudusuario";
 	}
-	
-	
+
+
 	  public String hashSHA256(String input) {
 	        try {
 	            MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -168,7 +168,7 @@ public class UsuarioController {
 	        }
 	        return null;
 	    }
-	
-	
-	
+
+
+
 }

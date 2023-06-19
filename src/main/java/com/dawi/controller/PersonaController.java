@@ -18,10 +18,10 @@ public class PersonaController {
 
 	@Autowired
 	private IPersonaRepository personaRepo;
-	
-	
+
+
 	private ArrayList<Persona> listarPersonas() {
-		ArrayList<Persona> lista=new ArrayList<Persona> ();
+		ArrayList<Persona> lista=new ArrayList<> ();
 		var personas=personaRepo.findAll();
 		for (Persona persona : personas) {
 			if(persona.getActivo_per().equals("a")) {
@@ -59,7 +59,7 @@ public class PersonaController {
 		model.addAttribute("persona", new Persona());
 		return "crudpersona";
 	}
-	
+
 	@PostMapping("/personaeliminar")
 	public String eliminarPersona(@RequestParam("id") int id, Model model) {
 		Persona opersona= personaRepo.findById(id).orElse(new Persona());
@@ -69,7 +69,7 @@ public class PersonaController {
 		model.addAttribute("personas",listarPersonas());
 		return "crudpersona";
 	}
-	
+
 	@PostMapping("/persona")
 	public String guardarPersona(@ModelAttribute Persona persona,Model model) {
 		String mensaje="";
@@ -77,7 +77,7 @@ public class PersonaController {
         try {
         	if(persona.getId_per()==0) {
         		persona.setBtieneusuario(0);
-            	personaRepo.save(persona);        		
+            	personaRepo.save(persona);
         	}else {
         		Persona opersona= personaRepo.findById(persona.getId_per()).orElse(new Persona());
         		opersona.setNom_per(persona.getNom_per());
@@ -86,7 +86,7 @@ public class PersonaController {
         		opersona.setCorreo_per(persona.getCorreo_per());
         		opersona.setDir_per(persona.getDir_per());
         		opersona.setFlagcliente_per(persona.getFlagcliente_per());
-            	personaRepo.save(opersona);        		
+            	personaRepo.save(opersona);
         	}
             mensaje = "Registro exitosa";
         } catch(Exception e) {
@@ -97,7 +97,7 @@ public class PersonaController {
 
 		return "crudpersona";
 	}
-	
-	
-	
+
+
+
 }

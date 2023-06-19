@@ -8,11 +8,11 @@
 <script src="https://kit.fontawesome.com/c0e26baa3d.js" crossorigin="anonymous"></script>   
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+ 
 </head>
 <body>
-
-	<div class="container">
-		<div>
+ 	<div class="container">
+		 <div>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="/">Proyecto DAWI 2023</a>
@@ -28,7 +28,7 @@
 							<li class="nav-item"><a class="nav-link active"
 								aria-current="page" href="/crud/producto">Productos</a></li>
 							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="/crud/categoria">Categorias</a></li>							
+								aria-current="page" href="/crud/categoria">Categorias</a></li>								
 							<li class="nav-item"><a class="nav-link active"
 								aria-current="page" href="persona">Persona</a></li>
 							<li class="nav-item"><a class="nav-link active"
@@ -49,22 +49,19 @@
 				</div>
 			</nav>
 		</div>
-		<h1 class="text-center">Mantenimiento Producto <i class="fas fa-solid fa-box"></i></h1>
+		<h1 class="text-center">Mantenimiento Categorias <i class="fas fa-solid fa-tag"></i></h1>
 
 		<!-- Button trigger modal -->
 		<button onclick="Nuevo()" type="button" class="btn btn-primary"
 			data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 			Nuevo</button>
-
-		<table class="table">
+			
+			<table class="table">
 
 			<thead>
 				<tr>
-					<th>Producto</th>
-					<th>Stock</th>
-					<th>Precio</th>
 					<th>Categoria</th>
-					<th style="display: none">Codigo Categoria</th>
+					<th>Descripción</th>
 					<th style="display: none">Imagen</th>
 					<th>Operaciones</th>
 				</tr>
@@ -72,18 +69,14 @@
 
 			<tbody>
 
-				<tr th:each="p : ${productos}">
-					<td th:text="${p.nom_prod}"></td>
-					<td th:text="${p.stock_prod}"></td>
-					<td th:text="${p.prec_prod}"></td>
-					<td th:text="${p.getObjCate().getNom_cat()}"></td>
-					<td style="display: none" th:text="${p.id_cat}"></td>
-					<td style="display: none" th:text="${p.imagen_prod}"></td>
-
+				<tr th:each="c : ${categorias}">
+					<td th:text="${c.nom_cat}"></td>
+					<td th:text="${c.desc_cat}" ></td>
+					<td style="display: none" th:text="${c.imagen_cat}"></td>
 					<td>
 						<button class="btn btn-primary" data-bs-toggle="modal"
 							data-bs-target="#staticBackdrop"
-							th:attr="onclick=|Editar(${p.id_prod},this)|">
+							th:attr="onclick=|Editar(${c.id_cat},this)|">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 								fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
   				<path
@@ -91,7 +84,7 @@
 				</svg>
 						</button>
 						<button class="btn btn-danger"
-							th:attr="onclick=|Eliminar(${p.id_prod})|">
+							th:attr="onclick=|Eliminar(${c.id_cat})|">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 								fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
  					 <path
@@ -105,15 +98,14 @@
 
 
 		</table>
-
+		
 		<div style="display: none">
-			<form action="/producto/eliminar" method="post">
-				<input id="txtidproducto" name="id" /> <input type="submit"
+			<form action="/categoria/eliminar" method="post">
+				<input id="txtidcategoria" name="id" /> <input type="submit"
 					id="txtboton" />
 			</form>
 		</div>
-
-
+		
 		<!-- Modal -->
 		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 			data-bs-keyboard="false" tabindex="-1"
@@ -121,53 +113,35 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="lbltitulo">Agregar Producto</h5>
+						<h5 class="modal-title" id="lbltitulo">Agregar Categoria</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form action="/crud/producto/guardar" method="post"
-							id="frmProducto" th:object="${producto}">
+						<form action="/crud/categoria/guardar" method="post"
+							id="frmCategoria" th:object="${categoria}" enctype="multipart/form-data">
 							<div style="display: none">
-								<label>Id Producto</label> <input type="text"
-									class="form-control" readonly th:field="*{id_prod}"
-									id="id_prod" />
+								<label>Id Categoria</label> <input type="text"
+									class="form-control" readonly th:field="*{id_cat}"
+									id="id_cat" />
 							</div>
 
 							<div>
-								<label>Producto</label> <input type="text"
-									class="form-control ob" data-mensaje="nombre del producto"
-									th:field="*{nom_prod}" id="nombre_prod" />
+								<label>Categoria</label> <input type="text"
+									class="form-control ob" data-mensaje="nombre de la categoria"
+									th:field="*{nom_cat}" id="nom_cat" />
 							</div>
 
 							<div>
-								<label>Stock</label> <input type="text" class="form-control ob"
-									data-mensaje="Cantidad de productos" th:field="*{stock_prod}"
-									id="stock_prod" />
+								<label>Descripción</label> <input type="text" class="form-control ob"
+									data-mensaje="descripcion de la categoria" th:field="*{desc_cat}"
+									id="desc_cat" />
 							</div>
-
-
-							<div>
-								<label>Precio</label> <input type="text" class="form-control ob"
-									data-mensaje="precio del producto" th:field="*{prec_prod}"
-									id="prec_prod" />
-							</div>
-
-							<div>
-								<label>Categoria</label> <select class="form-control ob"
-									data-mensaje="categoria del producto" id="cboOpcionCat"
-									th:field="*{id_cat}">
-									<option value="-1">--Seleccione--</option>
-									<option th:each="c : ${lstCategorias}" th:value="${c.id_cat}"
-										th:text="${c.nom_cat}"></option>
-								</select>
-							</div>
-
 
 							<!--<div class="mb-3">
 								<label for="formFileSm" class="form-label">Imagen </label> <input
-									class="form-control form-control-sm" th:fiel="*{imagen_prod}"
-									id="imagen_prod" type="file">
+									class="form-control form-control-sm" th:fiel="*{imagen_cat}"
+									id="imagen_cat" type="file">
 							</div>-->
 
 						</form>
@@ -182,7 +156,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	 </div>
+	 
 	<script src="/jquery.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -190,60 +165,52 @@
 		crossorigin="anonymous"></script>
 	<script src="/sweetalert.js"></script>
 	<script src="/generic.js"></script>
-
+	
 	<script>
 		function Eliminar(id) {
 			Confirmacion("Confirmacion",
-					"Desea eliminar realmente el producto", function() {
-						set("txtidproducto", id)
+					"Desea eliminar realmente la categoria", function() {
+						set("txtidcategoria", id)
 						Exito("Se elimino correctamente")
 						document.getElementById("txtboton").click()
 					})
 		}
 
 		function Nuevo() {
-			LimpiarDatos("frmProducto");
-			setI("lbltitulo", "Agregar nueva producto ");
-			document.getElementById("id_prod").value = "0"
+			LimpiarDatos("frmCategoria");
+			setI("lbltitulo", "Agregar nueva categoria ");
+			document.getElementById("id_cat").value = "0"
 		}
 
 		function Guardar() {
-			var errores = ValidarDatos("frmProducto")
+			var errores = ValidarDatos("frmCategoria")
 			if (errores != "") {
 				Error(errores)
 				return;
 			}
 
 			Confirmacion("Confirmacion",
-					"Desea guardar los datos del producto", function() {
-						var frmProducto = document.getElementById("frmProducto")
-						frmProducto.submit()
+					"Desea guardar los datos de la categoria", function() {
+						var frmCategoria = document.getElementById("frmCategoria")
+						frmCategoria.submit()
 						Exito("Se guardo con exito")
 					})
 
 		}
 
 		function Editar(id, btn) {
-			setI("lbltitulo", "Editar Producto ");
+			setI("lbltitulo", "Editar Categoria ");
 			var fila = btn.parentNode.parentNode;
-			var producto = fila.children[0].innerHTML;
-			var stock = parseInt(fila.children[1].innerHTML, 10);
-			var precio = parseFloat(fila.children[2].innerHTML);
-			var idcategoria = fila.children[4].innerHTML;
-			/*var imagen = fila.children[5].innerHTML;*/
-			set("id_prod", id)
-			set("nombre_prod", producto)
-			set("stock_prod", stock)
-			set("prec_prod", precio)
-			set("cboOpcionCat", idcategoria)
-			/*set("imagen_prod", imagen)*/
+			var categoria = fila.children[0].innerHTML;
+			var descripcion = fila.children[1].innerHTML;
+			/*var imagen = fila.children[2].innerHTML;*/
+			
+			set("id_cat", id)
+			set("nom_cat", categoria)
+			set("desc_cat", descripcion)
+			/*set("imagen_cat", imagen)*/
 
 		}
 	</script>
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 </html>

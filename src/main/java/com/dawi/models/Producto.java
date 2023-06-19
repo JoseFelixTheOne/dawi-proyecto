@@ -24,10 +24,10 @@ public class Producto {
 	private int id_cat;
 	private String activo_prod;
 	private byte[] imagen_prod;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_cat", insertable = false, updatable = false)
 	private Categoria objCate;
 
-	
+
 }
