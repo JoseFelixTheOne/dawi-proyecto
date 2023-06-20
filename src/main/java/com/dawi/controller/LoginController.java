@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dawi.models.Menu;
 import com.dawi.models.Persona;
@@ -19,6 +20,7 @@ import com.dawi.repository.IMenuRepository;
 import com.dawi.repository.IUsuarioRepository;
 
 @Controller
+@SessionAttributes("iidtipousuario")
 public class LoginController {
 
 	
@@ -54,6 +56,9 @@ public class LoginController {
 			@RequestParam(name = "contra")String contra , Model model) {
 		int exito=encontroUsuario(usuario,hashSHA256(contra));
 		if(exito!=0) {
+	        model.addAttribute("iidtipousuario", exito+"");
+	        String valor = (String) model.getAttribute("iidtipousuario"); 
+	        System.out.println("----------------------------------------------------------------"+valor);
 			model.addAttribute("menus", listarMenus());
 			return "index";
 		}
@@ -69,7 +74,7 @@ public class LoginController {
 					&& usuario.getNom_usu().equals(nombreusuario) 
 					&& usuario.getContra_usu().equals(contra)
 					) {
-				idusuario=usuario.getId_usu();break;
+				idusuario=usuario.getId_tipousu();break;
 			}
 		}
 		return idusuario;
