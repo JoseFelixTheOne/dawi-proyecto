@@ -171,6 +171,23 @@ public class ReporteController {
 		}
 	}
 	
+//	Reporte Producto
+	
+	@GetMapping("/reporte/producto")
+	public void consultarProducto(HttpServletResponse response) {
+		response.setHeader("Content-Disposition", "inline;"); 
+		response.setContentType("application/pdf");
+		
+		try {
+			String ru = resourceLoader.getResource("classpath:reportes/reporte_prod.jasper").getURI().getPath();
+			JasperPrint jasperPrint = JasperFillManager.fillReport(ru, null, dataSource.getConnection());
+			OutputStream outStream = response.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	
