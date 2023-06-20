@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Mantenimiento de Productos</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/c0e26baa3d.js" crossorigin="anonymous"></script>   
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+ 
+</head>
+<body>
+ 	<div class="container">
+		<h1 class="text-center">Reporte Categorias <i class="fas fa-solid fa-tag"></i></h1>
+
+		<form action="/reports/categoria" method="post"
+							id="frmCategoria" th:object="${categoria}" enctype="multipart/form-data">
+							<div>
+								<label>Estado</label> <select class="form-control ob"
+									data-mensaje="estado de la categoria" id="cboEstado"
+									th:field="*{activo_cat}">
+									<option value="-1">--Seleccione--</option>
+									<option value="a">Activo</option>
+									<option value="d">Desactivo</option>
+								</select>
+							</div>
+							<div>
+								<input type="submit" value="Filtrar" class="btn btn-warning">
+							</div>
+						</form>
+		
+		
+	 
+	<script src="/jquery.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<script src="/sweetalert.js"></script>
+	<script src="/generic.js"></script>
+	
+	<script>
+		
+		function Guardar() {
+			var errores = ValidarDatos("frmCategoria")
+			if (errores != "") {
+				Error(errores)
+				return;
+			}
+
+			Confirmacion("Confirmacion",
+					"Desea guardar los datos de la categoria", function() {
+						var frmCategoria = document.getElementById("frmCategoria")
+						frmCategoria.submit()
+						Exito("Se guardo con exito")
+					})
+
+		}
+	</script>
+</body>
+</html>
