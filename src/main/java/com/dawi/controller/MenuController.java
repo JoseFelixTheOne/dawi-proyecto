@@ -59,7 +59,7 @@ public class MenuController {
 	@PostMapping("/menu/eliminar")
 	public String eliminarMenu(@RequestParam("id") int id, Model model) {
 		Menu xmenu = menuRepo.findById(id).orElse(new Menu());
-		xmenu.setActivo_menu("i");
+		xmenu.setActivo_menu("d");
 		try {
 			menuRepo.save(xmenu);
 		} catch (Exception e) {

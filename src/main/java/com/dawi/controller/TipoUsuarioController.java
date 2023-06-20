@@ -78,7 +78,7 @@ public class TipoUsuarioController {
 	@PostMapping("/tipousuario/eliminar")
 	public String eliminarTipo(@RequestParam("id") int id, Model model) {
 		TipoUsuario xtipo = tipoUsuRepo.findById(id).orElse(new TipoUsuario());
-		xtipo.setActivo_tipousu("i");
+		xtipo.setActivo_tipousu("d");
 		try {
 			tipoUsuRepo.save(xtipo);
 		} catch (Exception e) {
