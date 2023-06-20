@@ -30,7 +30,7 @@ public class ProyectoController {
 		return lista;
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/sistema")
 	public String principal(Model model) {
 		model.addAttribute("menus", listarMenus());
 		return "index";
