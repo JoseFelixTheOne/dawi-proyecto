@@ -11,12 +11,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dawi.models.Menu;
 import com.dawi.models.Producto;
 import com.dawi.repository.CategoriaRepository;
+import com.dawi.repository.IMenuRepository;
 import com.dawi.repository.ProductoRepository;
 
 @Controller
 public class ProductoController {
+
+	@Autowired
+	private IMenuRepository menuRepo;
+	
+	private ArrayList<Menu> listarMenus(){
+		ArrayList<Menu> lista = new ArrayList<>();
+		try {
+			var menus = menuRepo.findAll();
+			for(Menu menu : menus) {
+				if(menu.getActivo_menu().equals("a"))
+					lista.add(menu);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
 	
 	@Autowired
 	private ProductoRepository prodRepo;
@@ -93,6 +112,7 @@ public class ProductoController {
 		cargarCombos(model);
 		model.addAttribute("productos", lstProductos());
 		model.addAttribute("producto", new Producto());
+		model.addAttribute("menus", listarMenus());
 		return "crudproductos";
 	}
 
@@ -103,6 +123,7 @@ public class ProductoController {
 		prodRepo.save(producto);
 		model.addAttribute("producto", new Producto());
 		model.addAttribute("productos", lstProductos());
+		model.addAttribute("menus", listarMenus());
 		return "redirect:/crud/producto";
 	}
 
@@ -119,7 +140,7 @@ public class ProductoController {
 		model.addAttribute("lstCategorias", catRepo.findAll());
 		model.addAttribute("productos", lstProductos());
 		model.addAttribute("mensaje", mensaje);
-
+		model.addAttribute("menus", listarMenus());
 		redirectAttributes.addFlashAttribute("mensaje", mensaje);
 		return "redirect:/crud/producto";
 	}

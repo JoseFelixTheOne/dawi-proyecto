@@ -10,11 +10,30 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dawi.models.Menu;
 import com.dawi.models.TipoUsuario;
+import com.dawi.repository.IMenuRepository;
 import com.dawi.repository.ITipoPersonaRepository;
 
 @Controller
 public class TipoUsuarioController {
+
+	@Autowired
+	private IMenuRepository menuRepo;
+	
+	private ArrayList<Menu> listarMenus(){
+		ArrayList<Menu> lista = new ArrayList<>();
+		try {
+			var menus = menuRepo.findAll();
+			for(Menu menu : menus) {
+				if(menu.getActivo_menu().equals("a"))
+					lista.add(menu);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
 
 	@Autowired
 	private ITipoPersonaRepository tipoUsuRepo;
@@ -36,6 +55,7 @@ public class TipoUsuarioController {
 	public String crudTipoUsuario(Model model) {
 		model.addAttribute("tipos", listarTiposUsuario());
 		model.addAttribute("tipo", new TipoUsuario());
+		model.addAttribute("menus", listarMenus());
 		return "crudtipo";
 	}
 	@PostMapping("/tipousuario")
@@ -51,6 +71,7 @@ public class TipoUsuarioController {
 		}
 		model.addAttribute("tipos", listarTiposUsuario());
 		model.addAttribute("tipo", new TipoUsuario());
+		model.addAttribute("menus", listarMenus());
 		model.addAttribute("mensaje", mensaje);
 		return "crudtipo";
 	}
@@ -65,6 +86,7 @@ public class TipoUsuarioController {
 		}
 		model.addAttribute("tipos", listarTiposUsuario());
 		model.addAttribute("tipo", new TipoUsuario());
+		model.addAttribute("menus", listarMenus());
 		return "crudtipo";
 	}
 }

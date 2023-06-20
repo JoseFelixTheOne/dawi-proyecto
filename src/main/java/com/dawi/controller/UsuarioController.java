@@ -13,15 +13,34 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dawi.models.Menu;
 import com.dawi.models.Persona;
 import com.dawi.models.TipoUsuario;
 import com.dawi.models.Usuario;
+import com.dawi.repository.IMenuRepository;
 import com.dawi.repository.IPersonaRepository;
 import com.dawi.repository.ITipoPersonaRepository;
 import com.dawi.repository.IUsuarioRepository;
 
 @Controller
 public class UsuarioController {
+
+	@Autowired
+	private IMenuRepository menuRepo;
+	
+	private ArrayList<Menu> listarMenus(){
+		ArrayList<Menu> lista = new ArrayList<>();
+		try {
+			var menus = menuRepo.findAll();
+			for(Menu menu : menus) {
+				if(menu.getActivo_menu().equals("a"))
+					lista.add(menu);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
 
 
 	@Autowired
@@ -51,6 +70,7 @@ public class UsuarioController {
 		model.addAttribute("usuarios",filtrarUsuarios(nombreusuario));
 		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("personas", listarPersonas());
+		model.addAttribute("menus", listarMenus());
 		return "crudusuario";
 	}
 	
@@ -62,7 +82,7 @@ public class UsuarioController {
 		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("personas", listarPersonas());
 		model.addAttribute("tipousuarios", listarTiposUsuario());
-
+		model.addAttribute("menus", listarMenus());
 		return "crudusuario";
 	}
 
@@ -113,6 +133,7 @@ public class UsuarioController {
 		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("personas", listarPersonas());
 		model.addAttribute("tipousuarios", listarTiposUsuario());
+		model.addAttribute("menus", listarMenus());
 		return "crudusuario";
 	}
 
@@ -144,7 +165,7 @@ public class UsuarioController {
 		model.addAttribute("personas", listarPersonas());
 		model.addAttribute("tipousuarios", listarTiposUsuario());
     	model.addAttribute("usuarios",listarUsuarios());
-
+    	model.addAttribute("menus", listarMenus());
 		return "crudusuario";
 	}
 

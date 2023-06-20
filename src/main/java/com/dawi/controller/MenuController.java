@@ -74,5 +74,6 @@ public class MenuController {
 		model.addAttribute("menus", listarMenus());
 		model.addAttribute("menu", new Menu());
 		model.addAttribute("iconos", iconList);
+		model.addAttribute("menus", listarMenus());
 	}
 }

@@ -3,6 +3,7 @@ package com.dawi.controller;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.sql.DataSource;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawi.models.Categoria;
+import com.dawi.models.Menu;
 import com.dawi.repository.CategoriaRepository;
+import com.dawi.repository.IMenuRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -26,6 +29,23 @@ import net.sf.jasperreports.engine.JasperPrint;
 
 @Controller
 public class ReporteController {
+
+	@Autowired
+	private IMenuRepository menuRepo;
+	
+	private ArrayList<Menu> listarMenus(){
+		ArrayList<Menu> lista = new ArrayList<>();
+		try {
+			var menus = menuRepo.findAll();
+			for(Menu menu : menus) {
+				if(menu.getActivo_menu().equals("a"))
+					lista.add(menu);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
 	
 	@GetMapping("/reportes")
 	public String cargarPagReporte() {
@@ -100,6 +120,7 @@ public class ReporteController {
 	@GetMapping("/consultas/categoria")
 	public String cargarConCategoria(Model model) {
 		model.addAttribute("categoria", new Categoria());
+		model.addAttribute("menus", listarMenus());
 		return "reportecategoria";
 	}
 	

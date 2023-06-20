@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dawi.models.Categoria;
+import com.dawi.models.Menu;
 import com.dawi.repository.CategoriaRepository;
+import com.dawi.repository.IMenuRepository;
 
 @Controller
 public class CategoriaController {
+	@Autowired
+	private IMenuRepository menuRepo;
 
 	@Autowired
 	private CategoriaRepository catRepo;
@@ -31,11 +35,26 @@ public class CategoriaController {
 		}
 		return lista;
 	}
+	private ArrayList<Menu> listarMenus(){
+		ArrayList<Menu> lista = new ArrayList<>();
+		try {
+			var menus = menuRepo.findAll();
+			for(Menu menu : menus) {
+				if(menu.getActivo_menu().equals("a"))
+					lista.add(menu);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
 	
 	@GetMapping("/categoria")
 	public String paginacategoria(Model model) {
 		model.addAttribute("categorias", lstCategorias());
+		model.addAttribute("menus", listarMenus());
 		model.addAttribute("categoria", new Categoria());
+		model.addAttribute("menus", listarMenus());
 		return "crudcategoria";
 	}
 	
@@ -45,7 +64,9 @@ public class CategoriaController {
 		categoria.setActivo_cat("d");
 		catRepo.save(categoria);
 		model.addAttribute("categoria", new Categoria());
+		model.addAttribute("menus", listarMenus());
 		model.addAttribute("categorias", lstCategorias());
+		model.addAttribute("menus", listarMenus());
 		return "redirect:/crud/categoria";
 	}
 	
@@ -60,8 +81,9 @@ public class CategoriaController {
 			mensaje = "Error al guardar";
 		}
 		model.addAttribute("categorias", lstCategorias());
+		model.addAttribute("menus", listarMenus());
 		model.addAttribute("mensaje", mensaje);
-
+		model.addAttribute("menus", listarMenus());
 		redirectAttributes.addFlashAttribute("mensaje", mensaje);
 		return "redirect:/crud/categoria";
 	}

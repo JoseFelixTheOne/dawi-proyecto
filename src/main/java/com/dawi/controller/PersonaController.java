@@ -10,11 +10,30 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dawi.models.Menu;
 import com.dawi.models.Persona;
+import com.dawi.repository.IMenuRepository;
 import com.dawi.repository.IPersonaRepository;
 
 @Controller
 public class PersonaController {
+
+	@Autowired
+	private IMenuRepository menuRepo;
+	
+	private ArrayList<Menu> listarMenus(){
+		ArrayList<Menu> lista = new ArrayList<>();
+		try {
+			var menus = menuRepo.findAll();
+			for(Menu menu : menus) {
+				if(menu.getActivo_menu().equals("a"))
+					lista.add(menu);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
 
 	@Autowired
 	private IPersonaRepository personaRepo;
@@ -50,6 +69,7 @@ public class PersonaController {
 		model.addAttribute("personas",filtrarPersonas(nombrecompleto));
 		model.addAttribute("persona", new Persona());
 		model.addAttribute("personabusqueda", nombrecompleto);
+		model.addAttribute("menus", listarMenus());
 		return "crudpersona";
 	}
 	
@@ -57,6 +77,7 @@ public class PersonaController {
 	public String paginapersona(Model model) {
 		model.addAttribute("personas",listarPersonas());
 		model.addAttribute("persona", new Persona());
+		model.addAttribute("menus", listarMenus());
 		return "crudpersona";
 	}
 
@@ -67,6 +88,7 @@ public class PersonaController {
 		personaRepo.save(opersona);
 		model.addAttribute("persona", new Persona());
 		model.addAttribute("personas",listarPersonas());
+		model.addAttribute("menus", listarMenus());
 		return "crudpersona";
 	}
 
@@ -94,7 +116,7 @@ public class PersonaController {
         }
 		model.addAttribute("personas",listarPersonas());
         model.addAttribute("mensaje", mensaje);
-
+        model.addAttribute("menus", listarMenus());
 		return "crudpersona";
 	}
 
