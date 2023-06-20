@@ -17,11 +17,7 @@ import com.dawi.repository.ProductoRepository;
 
 @Controller
 public class ProductoController {
-	@GetMapping("/")
-	public String principal() {
-		return "index";
-	}
-
+	
 	@Autowired
 	private ProductoRepository prodRepo;
 
@@ -92,7 +88,7 @@ public class ProductoController {
 		return lista;
 	}
 
-	@GetMapping("/crud/producto")
+	@GetMapping("/producto")
 	public String paginaproducto(Model model) {
 		cargarCombos(model);
 		model.addAttribute("productos", lstProductos());

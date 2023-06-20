@@ -27,7 +27,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 @Controller
 public class ReporteController {
 	
-	@GetMapping("/reports")
+	@GetMapping("/reportes")
 	public String cargarPagReporte() {
 		return "reportes";
 	}

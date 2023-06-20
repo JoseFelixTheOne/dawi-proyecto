@@ -32,7 +32,7 @@ public class CategoriaController {
 		return lista;
 	}
 	
-	@GetMapping("/crud/categoria")
+	@GetMapping("/categoria")
 	public String paginacategoria(Model model) {
 		model.addAttribute("categorias", lstCategorias());
 		model.addAttribute("categoria", new Categoria());

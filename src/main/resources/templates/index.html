@@ -11,9 +11,9 @@
 	
 	<div class="container">
 		<div>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="nav">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="/">Proyecto DAWI 2023</a>
+					<a class="navbar-brand" href="/"> <i class="fas fa-solid fa-house"></i></a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarNav"
 						aria-controls="navbarNav" aria-expanded="false"
@@ -22,32 +22,16 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarNav">
 						<ul class="navbar-nav">
-							
-							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="/crud/producto">Productos</a></li>	
-							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="/crud/categoria">Categorias</a></li>						
-							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="persona">Persona</a></li>
-							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="/usuario">Usuario</a></li>
-							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="/tipousuario">Tipo Usuario</a></li>
-							<li class="nav-item">
+							<li class="nav-item" th:each="m : ${menus}">
 								<a class="nav-link active"
-								aria-current="page" href="/menu">Menu</a>
-								</li>
-							<li class="nav-item"><a class="nav-link active"
-								href="#">Clientes</a></li>
-							
-							<li class="nav-item"><a class="nav-link active" href="/reports">Reportes</a>
-							</li>
+								aria-current="page" th:href="'/' + ${m.nombreopcion_menu.toLowerCase().replace(' ','')}"><i th:class="${m.iconoopcion_menu}"><span  th:text="${m.nombreopcion_menu}" class="badge bg-light text-dark"></span></i></a>
+								</li>	
 						</ul>
 					</div>
 				</div>
 			</nav>
 		</div>
-		<h1>Sistema de Ventas <i class="fas fa-solid fa-house"></i></h1>
+		<h1>Sistema de Mantenimiento </h1>
 	</div>
 	
 </body>

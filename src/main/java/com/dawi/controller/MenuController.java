@@ -26,7 +26,6 @@ public class MenuController {
 		try {
 			var menus = menuRepo.findAll();
 			for(Menu menu : menus) {
-				System.out.println(menus);
 				if(menu.getActivo_menu().equals("a"))
 					lista.add(menu);
 			}
