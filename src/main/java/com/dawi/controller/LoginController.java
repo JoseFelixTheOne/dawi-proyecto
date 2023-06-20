@@ -52,8 +52,8 @@ public class LoginController {
 	@PostMapping("/login")
 	public String loginUser(@RequestParam(name = "usuario")String usuario ,
 			@RequestParam(name = "contra")String contra , Model model) {
-		boolean exito=encontroUsuario(usuario,hashSHA256(contra));
-		if(exito==true) {
+		int exito=encontroUsuario(usuario,hashSHA256(contra));
+		if(exito!=0) {
 			model.addAttribute("menus", listarMenus());
 			return "index";
 		}
@@ -61,18 +61,18 @@ public class LoginController {
 		return "/login";
 	}
 	
-	private boolean encontroUsuario(String nombreusuario,String contra) {
-		boolean exito=false;
+	private int encontroUsuario(String nombreusuario,String contra) {
+		int idusuario=0;
 		var usuarios=usuarioRepo.findAll();
 		for (Usuario usuario : usuarios) {
 			if(usuario.getActivo_usu().equals("a") && usuario.getOpersona().getActivo_per().equals("a")
 					&& usuario.getNom_usu().equals(nombreusuario) 
 					&& usuario.getContra_usu().equals(contra)
 					) {
-				exito=true;break;
+				idusuario=usuario.getId_usu();break;
 			}
 		}
-		return exito;
+		return idusuario;
 	}
 	
 	  public String hashSHA256(String input) {
