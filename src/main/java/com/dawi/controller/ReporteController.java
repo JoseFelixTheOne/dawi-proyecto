@@ -47,10 +47,6 @@ public class ReporteController {
 		return lista;
 	}
 	
-	@GetMapping("/reportes")
-	public String cargarPagReporte() {
-		return "reportes";
-	}
 
 	
 //Reporte todo los productos

@@ -19,6 +19,8 @@ import com.dawi.models.Usuario;
 import com.dawi.repository.IMenuRepository;
 import com.dawi.repository.IUsuarioRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @SessionAttributes("iidtipousuario")
 public class LoginController {
@@ -64,6 +66,11 @@ public class LoginController {
 		}
 		model.addAttribute("error","Usuario o contraseña incorrecta");
 		return "/login";
+	}
+	
+	@GetMapping("/logout")
+	public String logoutUser(Model model) {
+		return "login";
 	}
 	
 	private int encontroUsuario(String nombreusuario,String contra) {

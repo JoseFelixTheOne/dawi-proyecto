@@ -32,10 +32,10 @@ public class ProyectoController {
 		return lista;
 	}
 	
-	@GetMapping("/sistema")
+	@GetMapping("/home")
 	public String principal(Model model) {
-        String valor = (String) model.getAttribute("nombreAtributo"); 
-        System.out.println("----------------------------------------------------------------"+valor);
+        //String valor = (String) model.getAttribute("nombreAtributo"); 
+        //System.out.println("----------------------------------------------------------------"+valor);
 		model.addAttribute("menus", listarMenus());
 		return "index";
 	}
