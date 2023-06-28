@@ -124,7 +124,7 @@ public class ProductoController {
 		model.addAttribute("producto", new Producto());
 		model.addAttribute("productos", lstProductos());
 		model.addAttribute("menus", listarMenus());
-		return "redirect:/crud/producto";
+		return "redirect:/producto";
 	}
 
 	@PostMapping("/crud/producto/guardar")
@@ -142,7 +142,7 @@ public class ProductoController {
 		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("menus", listarMenus());
 		redirectAttributes.addFlashAttribute("mensaje", mensaje);
-		return "redirect:/crud/producto";
+		return "redirect:/producto";
 	}
 
 	void cargarCombos(Model model) {

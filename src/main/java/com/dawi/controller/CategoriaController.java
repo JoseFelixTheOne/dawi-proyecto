@@ -67,7 +67,7 @@ public class CategoriaController {
 		model.addAttribute("menus", listarMenus());
 		model.addAttribute("categorias", lstCategorias());
 		model.addAttribute("menus", listarMenus());
-		return "redirect:/crud/categoria";
+		return "redirect:/categoria";
 	}
 	
 	@PostMapping("/crud/categoria/guardar")
@@ -85,7 +85,7 @@ public class CategoriaController {
 		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("menus", listarMenus());
 		redirectAttributes.addFlashAttribute("mensaje", mensaje);
-		return "redirect:/crud/categoria";
+		return "redirect:/categoria";
 	}
 	
 
